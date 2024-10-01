@@ -1,6 +1,12 @@
 import {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 
-import {transfer, withdrawal} from './transactionsSlice';
+import {
+  transfer,
+  withdrawal,
+  selectBalance,
+  deposit,
+} from './transactionsSlice';
 import './transactions.scss';
 
 /**

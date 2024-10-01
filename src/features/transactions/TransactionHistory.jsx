@@ -1,9 +1,11 @@
-import "./transactionHistory.scss";
+import './transactionHistory.scss';
+import {useSelector} from 'react-redux';
+import {selectHistory} from './transactionsSlice';
 
 /** Displays a table row with transaction information  */
-const TransactionRow = ({ transaction: { type, amount, balance } }) => (
+const TransactionRow = ({transaction: {type, amount, balance}}) => (
   <tr>
-    <th scope="row">{type}</th>
+    <th scope='row'>{type}</th>
     <td>{amount.toFixed(2)}</td>
     <td>{balance.toFixed(2)}</td>
   </tr>
@@ -13,16 +15,16 @@ const TransactionRow = ({ transaction: { type, amount, balance } }) => (
 export default function TransactionHistory() {
   // TODO: Get the transaction history from the Redux store using the useSelector hook
   const history = useSelector(selectHistory);
-
+  console.log(history.lenght);
   return (
-    <section className="transactions-history container">
+    <section className='transactions-history container'>
       <h2>Transaction History</h2>
       <table>
         <thead>
           <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Balance</th>
+            <th scope='col'>Type</th>
+            <th scope='col'>Amount</th>
+            <th scope='col'>Balance</th>
           </tr>
         </thead>
         <tbody>
@@ -30,13 +32,16 @@ export default function TransactionHistory() {
           Map over the transactions in `history`
           to render the appropriate `TransactionRow`s
           */}
-          {history.lenght > 0 ? (
-            history.map((transaction,index) => (
-              <TransactionRow key={index} transaction ={transaction} />
+          {history.length > 0 ? (
+            history.map((transaction, index) => (
+              <TransactionRow
+                key={index}
+                transaction={transaction}
+              />
             ))
           ) : (
             <tr>
-              <td colSpan={"3"}>No transactions available</td>
+              <td colSpan={'3'}>No transactions available</td>
             </tr>
           )}
         </tbody>
